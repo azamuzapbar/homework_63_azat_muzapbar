@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
        <div class="form">
             {% csrf_token %}
         {% bootstrap_form form %}

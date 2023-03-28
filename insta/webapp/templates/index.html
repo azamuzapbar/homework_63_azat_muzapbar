@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+Profile
+{% endblock %}
+{% block content %}
+<h1>{{ account.username }}</h1>
+<img src="{{ account.avatar.url }}" alt="Avatar">
+<p>{{ profile.first_name }} {{ profile.last_name }}</p>
+<p>{{ profile.user_info }}</p>
+{% if user.is_authenticated %}
+  {% if user not in profile.followers.all %}
+    <form method="POST" action="{% url 'follow_toggle' profile.user.username %}">
+      {% csrf_token %}
+      <button type="submit">Подписаться</button>
+    </form>
+  {% else %}
+    <form method="POST" action="{% url 'follow_toggle' profile.user.username %}">
+      {% csrf_token %}
+      <button type="submit">Отписаться</button>
+    </form>
+  {% endif %}
+{% endif %}
+<h2>Posts</h2>
+{% for post in posts %}
+<div class="card mb-3">
+    {% if post.image %}
+    <a href="{% url 'post_detail' post.id %}">
+        <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+    </a>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

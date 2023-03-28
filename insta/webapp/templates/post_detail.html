@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ post.description }}</h1>
+    <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+    <p>Author: {{ post.author }}</p>
+    <p>Likes: {{ post.likes_count }}</p>
+    <p>Comments: {{ post.comments_count }}</p>
+{% endblock %}
